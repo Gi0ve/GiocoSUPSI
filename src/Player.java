@@ -1,12 +1,32 @@
-public class Player{
-	 String name;
-	 int money;
-	 String symbol;
-	 
-	public Player(String name,String symbol) {
+public class Player {
+	String name;
+	int money;
+	String symbol;
+	Cell currentPosition;
+
+	public Player(String name, String symbol) {
 		this.name = name;
-		this.symbol=symbol;
+		this.symbol = symbol;
 	}
+	
+	
+
+	public Cell getCurrentPosition() {
+		return currentPosition;
+	}
+
+	public void add1(){
+		money++;
+	}
+	public void remove1(){
+		money--;
+	}
+
+	public void setCurrentPosition(Cell currentPosition) {
+		this.currentPosition = currentPosition;
+	}
+
+
 
 	public String getName() {
 		return name;
@@ -32,9 +52,15 @@ public class Player{
 		this.symbol = symbol;
 	}
 	
-	 
-	 
+	void move(Cell from,Cell to) {
+		from.removePlayer(this);
+		to.addPlayer(this);
+		this.currentPosition=to;
+		if(to.getMoney()>0){
+			this.money+=to.getMoney();
+			to.setMoney(0);
+		}
+	
+	}
+
 }
-
-
-
