@@ -9,8 +9,6 @@ public class Player {
 		this.symbol = symbol;
 	}
 	
-	
-
 	public Cell getCurrentPosition() {
 		return currentPosition;
 	}
@@ -52,15 +50,6 @@ public class Player {
 		this.symbol = symbol;
 	}
 	
-	void move(Cell from,Cell to) {
-		from.removePlayer(this);
-		to.addPlayer(this);
-		this.currentPosition=to;
-		if(to.getMoney()>0){
-			this.money+=to.getMoney();
-			to.setMoney(0);
-		}
-	
-	}
+
 
 }

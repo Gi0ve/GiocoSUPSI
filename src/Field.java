@@ -40,26 +40,9 @@ public class Field {
 		p1.setCurrentPosition(this.cells[0][9]);
 		this.cells[9][0].addPlayer(p2);
 		p2.setCurrentPosition(this.cells[9][0]);
-		placeRandomMoney(10);
 	}
 	
-	void printGrid(){
-		for(int y=0;y<cells.length;y++){
-			for(int x=0;x<cells[0].length;x++){
-				if(cells[y][x]==null){
-					System.out.print("|   ");
-				}else{
-					System.out.print("|"+cells[y][x].print());
-				}
-			}
-			System.out.print("|");
-			System.out.println("");
-			for(int t=0;t<cells[0].length;t++){
-				System.out.print("----");
-			}
-			System.out.println("");
-		}
-	}
+	
 	
 	public Cell[][] getCells() {
 		return cells;
@@ -69,18 +52,5 @@ public class Field {
 		this.cells = cells;
 	}
 
-	void placeRandomMoney(int number){
-		int x;
-		int y;
-		for(int i=0;i<number;i++){
-			y=(int)(Math.random()*10);
-			x=(int)(Math.random()*10);
-			while(this.cells[y][x].getPlayers().size()>0||this.cells[y][x].getMoney()!=0){
-				y=(int)Math.random()*10;
-				x=(int)Math.random()*10;
-			}
-			this.cells[y][x].setMoney(1);
-		}
-		
-	}
+
 }

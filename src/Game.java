@@ -3,70 +3,49 @@ public class Game {
 	Player player1;
 	Player player2;
 	Field field;
-	public Game(String name1,String name2) {
+	Game_logic logic;
+	InterfaceLayer i;
+	
+	public Game(String name1,String name2,Game_logic logic,InterfaceLayer i) {
 		this.player1=new Player(name1,"X");
 		this.player2=new Player(name2,"Y");
 		this.field=new Field(10, 10,player1,player2);
+		this.logic=logic;	
+		this.i=i;
 	}
 	void start(){
-		while(true){
-			playTurn(player1);
-			check();
-			if(checkForWinner()==true){
-				break;
-			}
-			playTurn(player2);
-			check();
-			if(checkForWinner()==true){
-				break;
-			}
-		}
+		logic.start(this);
 	}
 	
-	void playTurn(Player player){
-		Menu menu=new Menu();
-		System.out.println("È il turno di"+player.getName());
-		int cells=Dice.roll();
-		System.out.println("Hai lanciato"+cells);
-		menu.move(cells, player,this.field);
+	public Player getPlayer1() {
+		return player1;
 	}
-	void fight(){
-		System.out.println("DUELLO---- ZAM ZAM ZAM");
-		field.printGrid();
-		while(true){
-			int score1=Dice.roll();
-			int score2=Dice.roll();
-			if(score1>score2){
-				System.out.println("Vince il duello "+player1.getName());
-				player1.add1();
-				player2.remove1();
-				player2.move(player2.getCurrentPosition(), field.getCells()[9][0]);
-				break;
-			}else if(score1<score2){
-				System.out.println("Vince il duello "+player2.getName());
-				player2.add1();
-				player1.remove1();
-				player1.move(player1.getCurrentPosition(), field.getCells()[0][9]);
-				break;
-			}
-		}
+	public void setPlayer1(Player player1) {
+		this.player1 = player1;
 	}
-	void check(){
-		if(player1.getCurrentPosition()==player2.getCurrentPosition()){
-			fight();
-		}
+	public Player getPlayer2() {
+		return player2;
 	}
-	boolean checkForWinner(){
-		if(player1.getMoney()<0){
-			System.out.println("Vince "+player2.getName());
-		return true;	
-		}
-		if(player2.getMoney()<0){
-			System.out.println("Vince "+player1.getName());
-			return true;
-		}
-		return false;
+	public void setPlayer2(Player player2) {
+		this.player2 = player2;
 	}
-	
+	public Field getField() {
+		return field;
+	}
+	public void setField(Field field) {
+		this.field = field;
+	}
+	public Game_logic getLogic() {
+		return logic;
+	}
+	public void setLogic(Game_logic logic) {
+		this.logic = logic;
+	}
+	public InterfaceLayer getI() {
+		return i;
+	}
+	public void setI(InterfaceLayer i) {
+		this.i = i;
+	}
 	
 }
